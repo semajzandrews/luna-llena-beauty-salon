@@ -19,6 +19,13 @@ export default function Reveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    // If already in (or above) the viewport on mount, reveal immediately so nothing
+    // can get stuck at opacity 0 on first paint.
+    const r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight * 0.92) {
+      setShown(true);
+      return;
+    }
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -28,7 +35,7 @@ export default function Reveal({
           }
         });
       },
-      { threshold: 0.16, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0, rootMargin: "0px 0px -8% 0px" }
     );
     io.observe(el);
     return () => io.disconnect();

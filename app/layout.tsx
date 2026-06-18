@@ -1,38 +1,36 @@
 import type { Metadata } from "next";
-import { Newsreader } from "next/font/google";
 import SmoothScroll from "./components/SmoothScroll";
 import "./globals.css";
 
-const serif = Newsreader({
-  variable: "--font-serif",
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  style: ["italic", "normal"],
-});
+// Type ritual (E2): 2 voices.
+// DISPLAY  — Boska (Fontshare): high-contrast fashion serif, editorial + warm.
+// BODY/UI  — Switzer (Fontshare): clean modern grotesque.
+// LABEL VOICE — tracked small-caps (set in CSS). Foundry: Fontshare.
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://luna-llena-beauty-salon.vercel.app"),
   title: "Luna Llena Unisex Beauty Salon · Main St, City of Orange NJ",
   description:
-    "A unisex beauty salon on Main Street in the City of Orange, New Jersey. Cuts, color, blowouts, styling for everyone. Walk-ins welcome, appointments honored. Te ves bien bajo cualquier luz.",
+    "A warm beauty house on Main Street in the City of Orange, New Jersey. Cuts, color, braids, blowouts and styling for everyone. Te ves preciosa bajo esta luz.",
   openGraph: {
     title: "Luna Llena Unisex Beauty Salon · Orange NJ",
     description:
-      "Cuts, color, blowouts and styling for everyone, on Main Street in the City of Orange. Walk-ins welcome.",
+      "Cuts, color, braids, blowouts and styling for everyone, on Main Street in the City of Orange. Walk-ins welcome.",
     type: "website",
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" suppressHydrationWarning className={`${serif.variable} antialiased`}>
+    <html lang="es" suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
         <link
-          href="https://api.fontshare.com/v2/css?f[]=supreme@400,500,700,800&display=swap"
+          href="https://api.fontshare.com/v2/css?f[]=boska@400,500,600,700&f[]=switzer@400,500,600,700&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="night-grain min-h-screen">
+      <body className="cocoa-grain min-h-screen">
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
